@@ -18,7 +18,7 @@ jobs:
       - run: npm install
       - run:
           name: Run tests
-          command: npm-run ts-node src/index.ts
+          command: tsc && node dist/index.js
 
       - save_cache:
           paths:
