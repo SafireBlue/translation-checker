@@ -40,7 +40,11 @@ jobs:
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Add author name
           command: echo "init.author.name=Akira Ogawa" >> ~/repo/.npmrc
+      - run:
+          name: Add author url
           command: echo "init.author.url=https://safire.blue" >> ~/repo/.npmrc
       - run:
           name: Publish package
