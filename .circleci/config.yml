@@ -9,23 +9,19 @@ jobs:
     <<: *defaults  
     steps:
       - checkout
-
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-{{ checksum "package-lock.json" }}
           - v1-dependencies-
-
       - run: npm install
-      - run:
-          name: Run tests
-          command: tsc && node dist/index.js
-
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
+      - run:
+          name: Run tests
+          command: tsc && node dist/index.js
       - persist_to_workspace:
           root: ~/repo
           paths: .
@@ -52,7 +48,7 @@ jobs:
           command: npm publish
 
 workflows:
-  version: 2
+  version: 2.1
   test-deploy:
     jobs:
       - test
