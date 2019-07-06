@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  welcome-orb: circleci/welcome-orb@0.3.1
 defaults: &defaults
   working_directory: ~/repo
   docker:
