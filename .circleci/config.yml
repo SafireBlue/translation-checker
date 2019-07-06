@@ -35,7 +35,7 @@ jobs:
           at: ~/repo
       - run:
           name: tsc
-          command: tsc
+          command: node_modules/.bin/tsc
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
