@@ -48,7 +48,6 @@ jobs:
           command: npm publish
 
 workflows:
-  version: 2.1
   test-deploy:
     jobs:
       - test
