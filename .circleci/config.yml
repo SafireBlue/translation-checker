@@ -15,14 +15,13 @@ jobs:
           - v1-dependencies-{{ checksum "package-lock.json" }}
           - v1-dependencies-
       - run: npm install
-      - run: npm install --save-dev typescript ts-loader tslint-loader ts-node tslint
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Run tests
-          command: tsc && node dist/index.js
+          command: node_modules/.bin/tsc && node dist/index.js
       - persist_to_workspace:
           root: ~/repo
           paths: .
