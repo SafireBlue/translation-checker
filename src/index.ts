@@ -1,1 +1,4 @@
-export const Greeter = (name: string) => `Hello ${name}!!`;
+// QA
+
+// Util
+export { default as FindNumbers } from "./Util/FindNumbers";
