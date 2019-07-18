@@ -23,7 +23,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Run tests
-          command: node_modules/.bin/tsc && node dist/index.js
+          command: node_modules/.bin/tsc && node dist/src/index.js
       - persist_to_workspace:
           root: ~/repo
           paths: .
