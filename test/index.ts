@@ -6,6 +6,7 @@ import {FindNoTranslationFromSegments} from "../src/index";
 // console.dir(res);
 
 export const test = (async () => {
+    // tslint:disable-next-line:max-line-length
     const res = await FindNoTranslationFromSegments([{Source: {Value: "test1"}, Translation: {Value: "テスト2"}}, {Source: {Value: "test3"}, Translation: {Value: ""}}]);
     console.dir(res);
 });

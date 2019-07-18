@@ -30,6 +30,7 @@ export async function FindNoTranslationFromLocFormat(lf: ILocFormat<ISegment>): 
 // tslint:disable-next-line:max-line-length
 export async function FindNoTranslationFromLocFormats(lfs: Array<ILocFormat<ISegment>>): Promise<ResultFromLocFormat[] | null> {
     const result: ResultFromLocFormat[] = [];
-    await Promise.all(lfs.map((lf) => FindNoTranslationFromLocFormat(lf).then((res) => res && result.push(res))));
+    // tslint:disable-next-line:max-line-length
+    await Promise.all(lfs.map((async (lf) => await FindNoTranslationFromLocFormat(lf).then((res) => res && result.push(res)))));
     return result.length === 0 ? null : result;
 }
