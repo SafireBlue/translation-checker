@@ -27,6 +27,6 @@
   },
   "dependencies": {
     "localization-format": "^1.1.4",
-    "text-checker": "^1.0.8"
+    "text-checker": "^1.0.9"
   }
 }
