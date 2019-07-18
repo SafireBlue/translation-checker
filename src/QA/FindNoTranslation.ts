@@ -15,7 +15,8 @@ export async function FindNoTranslationFromSegment(seg: ISegment): Promise<ISegm
 
 export async function FindNoTranslationFromSegments(segs: ISegment[]): Promise<ISegment[] | null> {
     const result: ISegment[] = [];
-    await Promise.all(segs.map((seg) => FindNoTranslationFromSegment(seg).then((res) => res && result.push(res))));
+    // tslint:disable-next-line:max-line-length
+    await Promise.all(segs.map(async (seg) => await FindNoTranslationFromSegment(seg).then((res) => res && result.push(res))));
     return result.length === 0 ? null : result;
 }
 
