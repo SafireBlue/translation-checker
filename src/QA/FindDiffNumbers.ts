@@ -15,14 +15,14 @@ export async function FindDiffNumbersFromSegments(segs: ISegment[]): Promise<Res
     const result: ResultFromSegment[] = [];
     // tslint:disable-next-line:max-line-length
     await Promise.all(segs.map(async (seg) => await FindDiffNumbersFromSegment(seg).then((res) => res && result.push(res))));
-    return result.length === 0 ? result : null;
+    return result.length === 0 ? null : result;
 }
 
 // tslint:disable-next-line:max-line-length
 export async function FindDiffNumbersFromLocFormat(lf: ILocFormat<ISegment>): Promise<ResultFromLocFormat | null> {
     const result = new ResultFromLocFormat(lf);
     result.ResultsFromSegments = (await FindDiffNumbersFromSegments(lf.Segments!))!;
-    return result.ResultsFromSegments.length === 0 ? result : null;
+    return result.ResultsFromSegments.length === 0 ? null : result;
 }
 
 // tslint:disable-next-line:max-line-length
@@ -30,5 +30,5 @@ export async function FindDiffNumbersFromLocFormats(lfs: Array<ILocFormat<ISegme
     const result: ResultFromLocFormat[] = [];
     // tslint:disable-next-line:max-line-length
     await Promise.all(lfs.map(async (lf) => await FindDiffNumbersFromLocFormat(lf).then((res) => res && result.push(res))));
-    return result.length === 0 ? result : null;
+    return result.length === 0 ? null : result;
 }

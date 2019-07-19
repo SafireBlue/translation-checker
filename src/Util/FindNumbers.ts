@@ -29,7 +29,7 @@ export async function FindNumbersFromSegment(seg: ISegment): Promise<ResultFromS
 
 export async function FindNumbersFromSegments(segs: ISegment[]): Promise<ResultFromSegment[]> {
     const result: ResultFromSegment[] = [];
-    await Promise.all(segs.map((seg) => FindNumbersFromSegment(seg).then((res) => result.push(res))));
+    await Promise.all(segs.map(async (seg) => await FindNumbersFromSegment(seg).then((res) => result.push(res))));
     return result;
 }
 
@@ -43,6 +43,6 @@ export async function FindNumbersFromLocFormat(lf: ILocFormat<ISegment>): Promis
 // tslint:disable-next-line:max-line-length
 export async function FindNumbersFromLocFormats(lfs: Array<ILocFormat<ISegment>>): Promise<ResultFromLocFormat[]> {
     const result: ResultFromLocFormat[] = [];
-    await Promise.all(lfs.map((lf) => FindNumbersFromLocFormat(lf).then((res) => result.push(res))));
+    await Promise.all(lfs.map(async (lf) => await FindNumbersFromLocFormat(lf).then((res) => result.push(res))));
     return result;
 }
