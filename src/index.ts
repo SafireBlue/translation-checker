@@ -1,32 +1,21 @@
 // Util
 export {
-    FindNumbersFromLocFormat,
-    FindNumbersFromLocFormats,
-    FindNumbersFromSegment,
-    FindNumbersFromSegments,
-} from "./Util/FindNumbers";
-
-export {
-    FindSpacesFromLocFormat,
-    FindSpacesFromLocFormats,
-    FindSpacesFromSegment,
-    FindSpacesFromSegments,
-} from "./Util/FindSpaces";
+    FindWhat,
+    FindWordsFromLocFormat,
+    FindWordsFromLocFormats,
+    FindWordsFromSegment,
+    FindWordsFromSegments,
+    ResultFromLocFormat,
+    ResultFromSegment,
+} from "./Util/FindText";
 
 // QA
 export {
-    FindDiffNumbersFromSegment,
-    FindDiffNumbersFromLocFormat,
-    FindDiffNumbersFromLocFormats,
-    FindDiffNumbersFromSegments,
-} from "./QA/FindDiffNumbers";
-
-export {
-    FindDiffSpacesFromSegment,
-    FindDiffSpacesFromLocFormat,
-    FindDiffSpacesFromLocFormats,
-    FindDiffSpacesFromSegments,
-} from "./QA/FindDiffSpaces";
+    FindDiffFromSegment,
+    FindDiffFromLocFormat,
+    FindDiffFromLocFormats,
+    FindDiffFromSegments,
+} from "./QA/FindDiff";
 
 export {
     FindNoTranslationFromLocFormat,
