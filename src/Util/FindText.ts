@@ -40,7 +40,7 @@ export class ResultFromLocFormat {
 
 export async function FindWordsFromSegment(seg: ISegment, findWhat: FindWhat): Promise<ResultFromSegment> {
     const findWordsMethod = (() => {
-        switch(findWhat) {
+        switch (findWhat) {
             case FindWhat.AllCapsWords:
                 return FindAllCapsWords;
             case FindWhat.AlphanumericWords:
