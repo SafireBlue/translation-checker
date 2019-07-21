@@ -1,4 +1,5 @@
-import {ILocFormat, ISegment} from "localization-format";
+import {ILocFormat, ISegment, IText} from "localization-format";
+import { isObject } from "util";
 
 // tslint:disable-next-line:max-classes-per-file
 export class ResultFromLocFormat {
@@ -10,7 +11,7 @@ export class ResultFromLocFormat {
 }
 
 export async function FindNoTranslationFromSegment(seg: ISegment): Promise<ISegment | null> {
-    return seg.Translation.Value === "" ? seg : null;
+    return (isObject(seg.Translation) ? (seg.Translation as IText).Value : seg.Translation) === "" ? seg : null;
 }
 
 export async function FindNoTranslationFromSegments(segs: ISegment[]): Promise<ISegment[] | null> {

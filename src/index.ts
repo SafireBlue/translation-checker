@@ -9,6 +9,8 @@ export {
     ResultFromSegment,
 } from "./Util/FindText";
 
+export {default as GroupBy} from "./Util/GroupBy";
+
 // QA
 export {
     FindDiffFromSegment,
@@ -16,6 +18,14 @@ export {
     FindDiffFromLocFormats,
     FindDiffFromSegments,
 } from "./QA/FindDiff";
+
+export {
+    FindMultipleXFromLocFormat,
+    FindMultipleXFromLocFormats,
+    FindMultipleXFromSegments,
+    ResultFromFindMultipleXFromLocFormat,
+    ResultFromFindMultipleXFromSegments,
+} from "./QA/FindMultipleX";
 
 export {
     FindNoTranslationFromLocFormat,

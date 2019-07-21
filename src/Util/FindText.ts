@@ -1,4 +1,4 @@
-import {ILocFormat, ISegment} from "localization-format";
+import {ILocFormat, ISegment, IText} from "localization-format";
 import {
     FindAllCapsWords,
     FindAlphanumericWords,
@@ -9,6 +9,7 @@ import {
     FindUrls,
     FoundResult,
 } from "text-checker";
+import { isObject } from "util";
 
 export enum FindWhat {
     AllCapsWords,
@@ -58,8 +59,10 @@ export async function FindWordsFromSegment(seg: ISegment, findWhat: FindWhat): P
         }
     })();
     const result = new ResultFromSegment(seg);
-    const resSource = findWordsMethod!(seg.Source.Value).then((res) => result.Source = res);
-    const resTranslation = findWordsMethod!(seg.Translation.Value).then((res) => result.Translation = res);
+    const valSource = (isObject(seg.Source) ? (seg.Source as IText).Value : seg.Source as string);
+    const resSource = findWordsMethod!(valSource).then((res) => result.Source = res);
+    const valTranslation = (isObject(seg.Translation) ? (seg.Translation as IText).Value : seg.Translation as string);
+    const resTranslation = findWordsMethod!(valTranslation).then((res) => result.Translation = res);
     await Promise.all([resSource, resTranslation]);
     return result;
 }
