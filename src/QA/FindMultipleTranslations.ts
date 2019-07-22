@@ -23,15 +23,15 @@ export class ResultFromFindMultipleTranslationsFromLocFormat extends ResultFromF
 
 // tslint:disable-next-line:max-line-length
 export async function FindMultipleTranslationsFromSegments(segs: ISegment[], which: FindWhichX): Promise<ResultFromFindMultipleTranslationsFromSegments[] | null> {
-    return FindMultipleXFromSegments(segs, FindWhichX.Source);
+    return FindMultipleXFromSegments(segs, FindWhichX.MultipleTranslations);
 }
 
 // tslint:disable-next-line:max-line-length
 export async function FindMultipleTranslationsFromLocFormat(lf: ILocFormat<ISegment>, which: FindWhichX): Promise<ResultFromFindMultipleTranslationsFromLocFormat | null> {
-    return FindMultipleXFromLocFormat(lf, FindWhichX.Source);
+    return FindMultipleXFromLocFormat(lf, FindWhichX.MultipleTranslations);
 }
 
 // tslint:disable-next-line:max-line-length
 export async function FindMultipleTranslationsFromLocFormats(lfs: Array<ILocFormat<ISegment>>, which: FindWhichX): Promise<ResultFromFindMultipleTranslationsFromLocFormat[] | null> {
-    return FindMultipleXFromLocFormats(lfs, FindWhichX.Source);
+    return FindMultipleXFromLocFormats(lfs, FindWhichX.MultipleTranslations);
 }

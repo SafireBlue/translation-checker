@@ -20,12 +20,20 @@ export {
 } from "./QA/FindDiff";
 
 export {
-    FindMultipleXFromLocFormat,
-    FindMultipleXFromLocFormats,
-    FindMultipleXFromSegments,
-    ResultFromFindMultipleXFromLocFormat,
-    ResultFromFindMultipleXFromSegments,
-} from "./QA/FindMultipleX";
+    FindMultipleSourcesFromLocFormat,
+    FindMultipleSourcesFromLocFormats,
+    FindMultipleSourcesFromSegments,
+    ResultFromFindMultipleSourcesFromLocFormat,
+    ResultFromFindMultipleSourcesFromSegments,
+} from "./QA/FindMultipleSources";
+
+export {
+    FindMultipleTranslationsFromLocFormat,
+    FindMultipleTranslationsFromLocFormats,
+    FindMultipleTranslationsFromSegments,
+    ResultFromFindMultipleTranslationsFromLocFormat,
+    ResultFromFindMultipleTranslationsFromSegments,
+} from "./QA/FindMultipleTranslations";
 
 export {
     FindNoTranslationFromLocFormat,

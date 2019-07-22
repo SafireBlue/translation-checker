@@ -3,15 +3,15 @@ import { isObject } from "util";
 import GroupBy from "../Util/GroupBy";
 
 export enum FindWhichX {
-    Source,
-    Translation,
+    MultipleSources,
+    MultipleTranslations,
 }
 
 export class ResultFromFindMultipleXFromSegments {
-    public XValue!: string;
+    public Key!: string;
     public Segments!: ISegment[];
     public constructor(xValue: string, segments: ISegment[]) {
-        this.XValue = xValue;
+        this.Key = xValue;
         this.Segments = segments;
     }
 }
@@ -32,9 +32,13 @@ export async function FindMultipleXFromSegments(segs: ISegment[], which: FindWhi
         s.Translation = isObject(s.Translation) ? (s.Translation as IText).Value : s.Translation;
         return s;
     });
-    const groups = await GroupBy<ISegment>(segs, which.toString());
+    const groups = await GroupBy<ISegment>(segs, which === FindWhichX.MultipleSources ? "Translation" : "Source");
     const groupKeys = Object.keys(groups);
-    const filteredGroupKeys = groupKeys.filter((key) => [...new Set(groups[key])].length > 1);
+    const filteredGroupKeys = groupKeys.filter((key) => {
+        const group = groups[key];
+        const targetValues = group.map((s) => which === FindWhichX.MultipleSources ? s.Source : s.Translation);
+        return [...new Set(targetValues)].length > 1;
+    });
     const result: ResultFromFindMultipleXFromSegments[] = [];
     await Promise.all(filteredGroupKeys.map(async (key) => {
         result.push(new ResultFromFindMultipleXFromSegments(key, groups[key]));

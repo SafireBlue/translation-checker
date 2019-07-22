@@ -1,8 +1,8 @@
 import {
     FindDiffFromSegments,
     FindWhat,
-    ResultFromFindMultipleXFromSegments,
-    FindMultipleXFromSegments,
+    ResultFromFindMultipleTranslationsFromSegments,
+    FindMultipleTranslationsFromSegments,
     GroupBy,
 } from "../src/index";
 import { ISegment } from "localization-format";
@@ -16,7 +16,7 @@ import { FindWhichX } from "../src/QA/FindMultipleX";
 const segs: ISegment[] = [{Source: {Value: "test1 "}, Translation: {Value: "テスト2"}},
 {Source: {Value: "test3 "}, Translation: {Value: " "}},
 {Source: {Value: "test 3"}, Translation: {Value: " "}},
-{Source: {Value: "test"}, Translation: {Value: "まゆちゃん"}},
+{Source: {Value: "test"}, Translation: {Value: "たろう"}},
 {Source: {Value: "test"}, Translation: {Value: "テスト2"}}]
 
 export const test = (async () => {
@@ -25,9 +25,10 @@ export const test = (async () => {
     console.dir(res);
 });
 
-export let ResultFindMultipleXFromSegments!: ResultFromFindMultipleXFromSegments[] | null;
+export let ResultFindMultipleXFromSegments!: ResultFromFindMultipleTranslationsFromSegments[] | null;
 export const testFindMultipleXFromSegments = (async () => {
-    ResultFindMultipleXFromSegments = await FindMultipleXFromSegments(segs, FindWhichX.Source);
+    // tslint:disable-next-line:max-line-length
+    ResultFindMultipleXFromSegments = await FindMultipleTranslationsFromSegments(segs, FindWhichX.MultipleTranslations);
 });
 
 export let testGroupByResult: any;

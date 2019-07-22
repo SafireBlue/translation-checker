@@ -23,15 +23,15 @@ export class ResultFromFindMultipleSourcesFromLocFormat extends ResultFromFindMu
 
 // tslint:disable-next-line:max-line-length
 export async function FindMultipleSourcesFromSegments(segs: ISegment[], which: FindWhichX): Promise<ResultFromFindMultipleSourcesFromSegments[] | null> {
-    return FindMultipleXFromSegments(segs, FindWhichX.Translation);
+    return FindMultipleXFromSegments(segs, FindWhichX.MultipleSources);
 }
 
 // tslint:disable-next-line:max-line-length
 export async function FindMultipleSourcesFromLocFormat(lf: ILocFormat<ISegment>, which: FindWhichX): Promise<ResultFromFindMultipleSourcesFromLocFormat | null> {
-    return FindMultipleXFromLocFormat(lf, FindWhichX.Translation);
+    return FindMultipleXFromLocFormat(lf, FindWhichX.MultipleSources);
 }
 
 // tslint:disable-next-line:max-line-length
 export async function FindMultipleSourcesFromLocFormats(lfs: Array<ILocFormat<ISegment>>, which: FindWhichX): Promise<ResultFromFindMultipleSourcesFromLocFormat[] | null> {
-    return FindMultipleXFromLocFormats(lfs, FindWhichX.Translation);
+    return FindMultipleXFromLocFormats(lfs, FindWhichX.MultipleSources);
 }
