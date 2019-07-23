@@ -40,4 +40,5 @@ export {
     FindNoTranslationFromLocFormats,
     FindNoTranslationFromSegment,
     FindNoTranslationFromSegments,
+    ResultFromFindNoTranslationFromLocFormat,
 } from "./QA/FindNoTranslation";

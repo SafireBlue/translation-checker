@@ -5,6 +5,7 @@ import {
     FindCamelCaseWords,
     FindMarkups,
     FindNumbers,
+    FindRepeatedWords,
     FindSpaces,
     FindUrls,
     FoundResult,
@@ -17,6 +18,7 @@ export enum FindWhat {
     CamelCaseWords,
     Markups,
     Numbers,
+    RepeatedWords,
     Spaces,
     Urls,
 }
@@ -52,6 +54,8 @@ export async function FindWordsFromSegment(seg: ISegment, findWhat: FindWhat): P
                 return FindMarkups;
             case FindWhat.Numbers:
                 return FindNumbers;
+            case FindWhat.RepeatedWords:
+                return FindRepeatedWords;
             case FindWhat.Spaces:
                 return FindSpaces;
             case FindWhat.Urls:
