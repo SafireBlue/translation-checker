@@ -18,8 +18,8 @@ export async function QANoTranslationFromSegments(segs: ISegment[]): Promise<Seg
 // tslint:disable-next-line:max-line-length
 export async function QANoTranslationFromLocFormat(lf: ILocFormat<ISegment>): Promise<LocFormatCheckResult | null> {
     const segmentCheckResults = (await QANoTranslationFromSegments(lf.Segments!))!;
-    const result = new LocFormatCheckResult(segmentCheckResults[0].Name, lf, segmentCheckResults);
-    return result.SegmentCheckResults.length === 0 ? null : result;
+    const result = new LocFormatCheckResult(segmentCheckResults[0].Name, lf, {segmentCheckResults});
+    return result!.SegmentCheckResults!.length === 0 ? null : result;
 }
 
 // tslint:disable-next-line:max-line-length

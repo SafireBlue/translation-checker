@@ -64,7 +64,7 @@ export async function FindWordsFromSegments(segs: ISegment[], findWhat: FindWhat
 // tslint:disable-next-line:max-line-length
 export async function FindWordsFromLocFormat(lf: ILocFormat<ISegment>, findWhat: FindWhat): Promise<LocFormatCheckResult> {
     const segmentCheckResults = await FindWordsFromSegments(lf.Segments!, findWhat);
-    return new LocFormatCheckResult(segmentCheckResults[0].Name, lf, segmentCheckResults);
+    return new LocFormatCheckResult(segmentCheckResults[0].Name, lf, {segmentCheckResults});
 }
 
 // tslint:disable-next-line:max-line-length

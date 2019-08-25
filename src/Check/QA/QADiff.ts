@@ -7,7 +7,7 @@ import SegmentCheckResult from "../SegmentCheckResult";
 export async function QADiffFromSegment(seg: ISegment, findWhat: FindWhat): Promise<SegmentCheckResult | null> {
     const result = await FindWordsFromSegment(seg, findWhat);
     result.Name = `QADiff${findWhat.toString()}`;
-    const isDiff = (result.Source.length === result.Translation.length) 
+    const isDiff = (result.Source.length === result.Translation.length)
                     && result.Source!.every((v, i) => v.Value === result.Translation[i].Value);
     return isDiff ? null : result;
 }
@@ -23,7 +23,8 @@ export async function QADiffFromSegments(segs: ISegment[], findWhat: FindWhat): 
 // tslint:disable-next-line:max-line-length
 export async function QADiffFromLocFormat(lf: ILocFormat<ISegment>, findWhat: FindWhat): Promise<LocFormatCheckResult | null> {
     const segmentCheckResults = await QADiffFromSegments(lf.Segments!, findWhat);
-    return segmentCheckResults ? new LocFormatCheckResult(segmentCheckResults![0].Name, lf, segmentCheckResults) : null;
+    // tslint:disable-next-line:max-line-length
+    return segmentCheckResults ? new LocFormatCheckResult(segmentCheckResults![0].Name, lf, {segmentCheckResults}) : null;
 }
 
 // tslint:disable-next-line:max-line-length

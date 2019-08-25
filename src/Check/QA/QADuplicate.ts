@@ -1,6 +1,7 @@
 import { ILocFormat, ISegment, IText } from "localization-format";
 import { isObject } from "util";
 import CheckResult from "../CheckResult";
+import LocFormatCheckResult from "../LocFormatCheckResult";
 import GroupBy from "../Util/GroupBy";
 import QADupllicateCheckResult from "./QADuplicateCheckResult";
 
@@ -31,15 +32,16 @@ export async function QADuplicateFromSegments(segs: ISegment[], targetValue: Tar
 }
 
 // tslint:disable-next-line:max-line-length
-export async function QADuplicateFromLocFormat(lf: ILocFormat<ISegment>, targetValue: TargetValue): Promise<QADupllicateCheckResult[] | null> {
-    const result = (await QADuplicateFromSegments(lf.Segments!, targetValue))!;
-    return result;
+export async function QADuplicateFromLocFormat(lf: ILocFormat<ISegment>, targetValue: TargetValue): Promise<LocFormatCheckResult | null> {
+    const qaDuplicateCheckResults = (await QADuplicateFromSegments(lf.Segments!, targetValue))!;
+    // tslint:disable-next-line:max-line-length
+    return qaDuplicateCheckResults ? new LocFormatCheckResult(qaDuplicateCheckResults[0].Name, lf, {qaDuplicateCheckResults}) : null;
 }
 
 // tslint:disable-next-line:max-line-length
-export async function QADuplicateFromLocFormats(lfs: Array<ILocFormat<ISegment>>, targetValue: TargetValue): Promise<QADupllicateCheckResult[] | null> {
-    const result: QADupllicateCheckResult[] = [];
+export async function QADuplicateFromLocFormats(lfs: Array<ILocFormat<ISegment>>, targetValue: TargetValue): Promise<LocFormatCheckResult[] | null> {
+    const result: LocFormatCheckResult[] = [];
     // tslint:disable-next-line:max-line-length
-    await Promise.all(lfs.map((async (lf) => await QADuplicateFromLocFormat(lf, targetValue).then((res) => res && result.push(...res)))));
+    await Promise.all(lfs.map((async (lf) => await QADuplicateFromLocFormat(lf, targetValue).then((res) => res && result.push(res)))));
     return result.length === 0 ? null : result;
 }
