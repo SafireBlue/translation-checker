@@ -1,12 +1,12 @@
-import {
-    FindDiffFromSegments,
-    FindWhat,
-    ResultFromFindMultipleTranslationsFromSegments,
-    FindMultipleTranslationsFromSegments,
-    GroupBy,
-} from "../src/index";
 import { ISegment } from "localization-format";
-import { FindWhichX } from "../src/QA/FindMultipleX";
+import {
+    FindWhat,
+    GroupBy,
+    QADiffFromSegments,
+    QADuplicateCheckResult,
+    QADuplicateFromSegments,
+    TargetValue,
+} from "../src/index";
 
 // tslint:disable-next-line:max-line-length
 // const res = FindNumbersFromSegment({FormatIndex: null, Props: null, Source: {Value: "test1", BeginOffSet: null}, Translation: {Value: "テスト2", BeginOffSet: null}});
@@ -21,14 +21,14 @@ const segs: ISegment[] = [{Source: {Value: "test1 "}, Translation: {Value: "テ�
 
 export const test = (async () => {
     // tslint:disable-next-line:max-line-length
-    const res = await FindDiffFromSegments(segs, FindWhat.Spaces);
+    const res = await QADiffFromSegments(segs, FindWhat.Spaces);
     console.dir(res);
 });
 
-export let ResultFindMultipleXFromSegments!: ResultFromFindMultipleTranslationsFromSegments[] | null;
+export let ResultFindMultipleXFromSegments!: QADuplicateCheckResult[] | null;
 export const testFindMultipleXFromSegments = (async () => {
     // tslint:disable-next-line:max-line-length
-    ResultFindMultipleXFromSegments = await FindMultipleTranslationsFromSegments(segs, FindWhichX.MultipleTranslations);
+    ResultFindMultipleXFromSegments = await QADuplicateFromSegments(segs, TargetValue.Translation);
 });
 
 export let testGroupByResult: any;
