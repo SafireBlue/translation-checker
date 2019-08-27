@@ -25,7 +25,7 @@ export enum FindWhat {
 }
 
 // tslint:disable-next-line:max-line-length
-export async function FindWordsFromSegment(seg: ISegment, findWhat: FindWhat, options?: any): Promise<SegmentCheckResult> {
+export async function FindWordsFromSegment(seg: ISegment, findWhat: FindWhat, options?: any): Promise<SegmentCheckResult | null> {
     const findWordsMethod = (() => {
         switch (findWhat) {
             case FindWhat.AllCapsWords:
@@ -57,27 +57,32 @@ export async function FindWordsFromSegment(seg: ISegment, findWhat: FindWhat, op
     const resTranslation = fnTranslation.then((res) => result.Translation = res);
 
     await Promise.all([resSource, resTranslation]);
-    return result;
+
+    return (result.Source.length === 0 && result.Translation.length === 0) ? null : result;
 }
 
 // tslint:disable-next-line:max-line-length
-export async function FindWordsFromSegments(segs: ISegment[], findWhat: FindWhat, options?: any): Promise<SegmentCheckResult[]> {
+export async function FindWordsFromSegments(segs: ISegment[], findWhat: FindWhat, options?: any): Promise<SegmentCheckResult[] | null> {
     const result: SegmentCheckResult[] = [];
-    // tslint:disable-next-line:max-line-length
-    await Promise.all(segs.map(async (seg) => await FindWordsFromSegment(seg, findWhat, options).then((res) => result.push(res))));
+    await Promise.all(segs.map(async (seg) => {
+        await FindWordsFromSegment(seg, findWhat, options).then((res) => res && result.push(res));
+    }));
     return result;
 }
 
 // tslint:disable-next-line:max-line-length
-export async function FindWordsFromLocFormat(lf: ILocFormat<ISegment>, findWhat: FindWhat, options?: any): Promise<LocFormatCheckResult> {
+export async function FindWordsFromLocFormat(lf: ILocFormat<ISegment>, findWhat: FindWhat, options?: any): Promise<LocFormatCheckResult | null> {
     const segmentCheckResults = await FindWordsFromSegments(lf.Segments!, findWhat, options);
-    return new LocFormatCheckResult(segmentCheckResults[0].Name, lf, {segmentCheckResults});
+    // tslint:disable-next-line:max-line-length
+    return segmentCheckResults ? new LocFormatCheckResult(segmentCheckResults[0].Name, lf, {segmentCheckResults}) : null;
 }
 
 // tslint:disable-next-line:max-line-length
-export async function FindWordsFromLocFormats(lfs: Array<ILocFormat<ISegment>>, findWhat: FindWhat, options?: any): Promise<LocFormatCheckResult[]> {
+export async function FindWordsFromLocFormats(lfs: Array<ILocFormat<ISegment>>, findWhat: FindWhat, options?: any): Promise<LocFormatCheckResult[] | null> {
     const result: LocFormatCheckResult[] = [];
     // tslint:disable-next-line:max-line-length
-    await Promise.all(lfs.map(async (lf) => await FindWordsFromLocFormat(lf, findWhat, options).then((res) => result.push(res))));
+    await Promise.all(lfs.map(async (lf) => {
+        await FindWordsFromLocFormat(lf, findWhat, options).then((res) => res && result.push(res));
+    }));
     return result;
 }

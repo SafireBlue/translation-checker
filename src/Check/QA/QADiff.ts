@@ -6,6 +6,9 @@ import SegmentCheckResult from "../SegmentCheckResult";
 // tslint:disable-next-line:max-line-length
 export async function QADiffFromSegment(seg: ISegment, findWhat: FindWhat, options?: any): Promise<SegmentCheckResult | null> {
     const result = await FindWordsFromSegment(seg, findWhat, options);
+    if (!result) {
+        return null;
+    }
     result.Name = `QADiff${findWhat.toString()}`;
     const isDiff = (result.Source.length === result.Translation.length)
                     && result.Source!.every((v, i) => v.Value === result.Translation[i].Value);
