@@ -1,6 +1,5 @@
 import { ILocFormat, ISegment, IText } from "localization-format";
 import { isObject } from "util";
-import CheckResult from "../CheckResult";
 import LocFormatCheckResult from "../LocFormatCheckResult";
 import GroupBy from "../Util/GroupBy";
 import QADupllicateCheckResult from "./QADuplicateCheckResult";
@@ -12,12 +11,16 @@ export enum TargetValue {
 
 // tslint:disable-next-line:max-line-length
 export async function QADuplicateFromSegments(segs: ISegment[], targetValue: TargetValue): Promise<QADupllicateCheckResult[] | null> {
-    segs = segs.map((s) => {
-        s.Source = isObject(s.Source) ? (s.Source as IText).Value : s.Source;
-        s.Translation = isObject(s.Translation) ? (s.Translation as IText).Value : s.Translation;
-        return s;
+    const segments = segs.map((s) => {
+        const rtn: ISegment = {
+            FormatIndex: s.FormatIndex,
+            Props: s.Props,
+            Source: isObject(s.Source) ? (s.Source as IText).Value : s.Source,
+            Translation: isObject(s.Translation) ? (s.Translation as IText).Value : s.Translation,
+        };
+        return rtn;
     });
-    const groups = await GroupBy<ISegment>(segs, targetValue === TargetValue.Source ? "Translation" : "Source");
+    const groups = await GroupBy<ISegment>(segments, targetValue === TargetValue.Source ? "Translation" : "Source");
     const groupKeys = Object.keys(groups);
     const filteredGroupKeys = groupKeys.filter((key) => {
         const group = groups[key];
