@@ -14,14 +14,14 @@ import LocFormatCheckResult from "../LocFormatCheckResult";
 import SegmentCheckResult from "../SegmentCheckResult";
 
 export enum FindWhat {
-    AllCapsWords,
-    AlphanumericWords,
-    CamelCaseWords,
-    Markups,
-    Numbers,
-    RepeatedWords,
-    Spaces,
-    Urls,
+    AllCapsWords = "AllCapsWords",
+    AlphanumericWords = "AlphanumericWords",
+    CamelCaseWords = "CamelCaseWords",
+    Markups = "Markups",
+    Numbers = "Numbers",
+    RepeatedWords = "RepeatedWords",
+    Spaces = "Spaces",
+    Urls = "Urls",
 }
 
 // tslint:disable-next-line:max-line-length
